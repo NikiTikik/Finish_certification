@@ -1,0 +1,36 @@
+---
+- name: Clone repo
+  ansible.builtin.git:
+    repo: https://github.com/NikiTikik/Web_app.git
+    dest: /home/niki/flsk
+    single_branch: yes
+    version: master
+
+# - name: Build an image of web_app
+#   docker_image:   
+#     name: nikitiki/flask
+#     tag: v1
+#     build:
+#       path: /home/niki/flsk
+#       source: build
+#     state: present
+
+# - name: Build an image and push it to a private repo
+#   docker_image:
+#     build:
+#       path: ./flsk
+#     name: nikitiki/flask
+#     tag: v1
+#     push: yes
+#     source: build     
+- name: Build and go further
+  shell: "docker build -t niki/flask_app:1.0 /home/niki/flsk; docker run -p 5000:5000 niki/flask_app:1.0 &"
+
+# - name: Create flask container
+#   docker_container:
+#     name: web_application
+#     image: b17cba8a9488
+#     state: started
+#     recreate: yes
+#     published_ports:
+#       - 5000:5000

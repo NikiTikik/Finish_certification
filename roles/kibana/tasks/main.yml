@@ -1,0 +1,15 @@
+---
+- name: Install kibana via apt
+  apt:
+    name: kibana
+    state: latest
+    update-cache: true
+- name: Updating the config file to allow outside access
+  lineinfile:
+   destfile: /etc/kibana/kibana.yml
+   regexp: 'server.host:'
+   line: 'server.host: 0.0.0.0'
+- name: Starting Kibana
+  service:
+   name: kibana
+   state: started

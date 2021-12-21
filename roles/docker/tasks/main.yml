@@ -1,0 +1,64 @@
+---
+- name: Install docker
+  block:
+    - name: Add universe
+      apt_repository:
+        repo: "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe"
+        state: present
+    - name: Additional packets
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        update-cache: true
+        cache_valid_time: 86400
+    - name: Add docker-key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add stable repository
+      apt_repository:
+        repo: >
+          deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }}
+          {{ ansible_distribution_release }} stable
+        state: present
+        update-cache: true
+        filename: docker
+    - name: Docker CE
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        update-cache: true
+    - name: Check docker-installation
+      service:
+        name: docker
+        state: restarted
+        enabled: true
+  become: true
+- name: Install docker-compose (last version)
+  block:
+    - name: Last github version
+      uri:
+        url: https://api.github.com/repos/docker/compose/releases/latest
+        body_format: json
+      register: page
+    - name: Installation
+      get_url:
+        url: "https://github.com/docker/compose/releases/download/{{ page.json.tag_name }}/docker-compose-Linux-x86_64"
+        dest: /usr/local/bin/docker-compose
+        mode: 0755
+  become: true
+# - name: Postinstallation
+#   block:
+#     - name: Add user
+#       user:
+#         name: "{{ansible_user}}"
+#         groups: docker
+#         append: true
+#     - name: Reboot
+#       reboot:
+#   become: true

@@ -1,0 +1,16 @@
+---
+- name: Install nginx via apt
+  ansible.builtin.apt:
+    name: nginx
+    state: latest
+    update-cache: true
+- name: Add my_domain
+  template:
+    src: templates/my_domain
+    dest: /etc/nginx/sites-enabled/my_domain
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+- name: Starting nginx
+  service:
+   name: nginx
+   state: started
