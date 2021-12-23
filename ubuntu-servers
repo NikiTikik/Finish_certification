@@ -1,2 +1,2 @@
 [ubuntu-servers]
-192.168.56.102 ansible_user=niki ansible_sudo_pass="123" ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.128.0.13 ansible_user=niki ansible_ssh_common_args='-o StrictHostKeyChecking=no'
