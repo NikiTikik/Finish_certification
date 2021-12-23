@@ -26,6 +26,9 @@
         state: present
         update-cache: true
         filename: docker
+    - name: Pause for 1 minutes to downloadr repo
+      pause:
+        minutes: 1
     - name: Docker CE
       apt:
         name:
