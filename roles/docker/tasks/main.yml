@@ -12,6 +12,7 @@
           - curl
           - gnupg
           - lsb-release
+          - software-properties-common
         update-cache: true
         cache_valid_time: 86400
     - name: Add docker-key
@@ -20,18 +21,20 @@
         state: present
     - name: Add stable repository
       apt_repository:
-        repo: >
-          deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }}
-          {{ ansible_distribution_release }} stable
+        # repo: >
+        #   deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }}
+        #   {{ ansible_distribution_release }} stable
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
         state: present
         update-cache: true
-        filename: docker
+        # filename: docker
     - name: Docker
       apt:
         name:
           - docker-ce
           - docker-ce-cli
           - containerd.io
+        state: present
         update-cache: true
     - name: Check docker-installation
       service:
