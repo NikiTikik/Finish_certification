@@ -3,9 +3,9 @@
   become: true
   become_method: sudo
   roles:
-    # - kibana
-    # - flask
+    - kibana
+    - flask
     - docker
-    # - nginx
-    # - elasticsearch
-    # - filebeat
+    - nginx
+    - elasticsearch
+    - filebeat
