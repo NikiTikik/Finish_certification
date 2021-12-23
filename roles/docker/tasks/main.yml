@@ -26,16 +26,16 @@
         #   {{ ansible_distribution_release }} stable
         repo: deb https://download.docker.com/linux/ubuntu bionic stable
         state: present
-        update-cache: true
+        # update-cache: true
         # filename: docker
     - name: Docker
-      apt:
-        name:
-          - docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+        # name:
+        #   - docker-ce
           # - docker-ce-cli
           # - containerd.io
-        state: present
-        update-cache: true
+        # state: present
+        # update-cache: true
     - name: Check docker-installation
       service:
         name: docker
