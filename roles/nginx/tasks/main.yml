@@ -4,6 +4,10 @@
     name: nginx
     state: latest
     update-cache: true
+- name: Create directory
+  file:
+    path: /etc/nginx/sites-enabled
+    state: directory
 - name: Add my_domain
   template:
     src: templates/my_domain
