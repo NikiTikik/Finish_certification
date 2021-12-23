@@ -4,16 +4,25 @@
     name: filebeat
     state: latest
     update-cache: true
-- name: Updating the config file to send logs on kibana (user)
-  lineinfile:
-    destfile: /etc/filebeat/filebeat.yml
-    regexp: '^  #username: "elastic"'
-    line: '  username: "elastic"'
-- name: Updating the config file to send logs on kibana (password)
-  lineinfile:
-    destfile: /etc/filebeat/filebeat.yml
-    regexp: '^  #password: "changeme"'
-    line: '  password: "changeme"'
+# - name: Updating the config file to send logs on kibana (user)
+#   lineinfile:
+#     destfile: /etc/filebeat/filebeat.yml
+#     regexp: '^  #username: "elastic"'
+#     line: '  username: "elastic"'
+# - name: Updating the config file to send logs on kibana (password)
+#   lineinfile:
+#     destfile: /etc/filebeat/filebeat.yml
+#     regexp: '^  #password: "changeme"'
+#     line: '  password: "changeme"'
+- name: Add config_file
+  template:
+    src: templates/filebeat.yml
+    dest: /etc/filebeat/filebeat.yml
+    # owner: "{{ ansible_user }}"
+    # group: "{{ ansible_user }}"
 #- command: filebeat setup; filebeat modules enable nginx
-
+- name: Starting filebeat
+  service:
+   name: nginx
+   state: restarted
     

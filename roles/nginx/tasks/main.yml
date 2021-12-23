@@ -4,17 +4,17 @@
     name: nginx
     state: latest
     update-cache: true
-- name: Create directory
-  file:
-    path: /etc/nginx/sites-enabled
-    state: directory
 - name: Add my_domain
   template:
     src: templates/my_domain
     dest: /etc/nginx/sites-enabled/my_domain
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
+- name: Delete default setting
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
 - name: Starting nginx
   service:
    name: nginx
-   state: started
+   state: restarted

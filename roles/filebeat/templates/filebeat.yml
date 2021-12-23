@@ -1,0 +1,18 @@
+setup.kibana:
+  host: "http://0.0.0.0:5601"
+
+output.elasticsearch:
+  hosts: ["http://0.0.0.0:9200"]
+  username: "elastic"
+  password: "changeme"
+
+# filebeat.inputs:
+# - type: log
+#   paths:
+#     - /var/log/nginx/access.log
+#     - /var/log/nginx/error.log
+
+filebeat.modules:
+- module: nginx
+  access:
+  error:
