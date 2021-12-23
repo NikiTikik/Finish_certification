@@ -20,7 +20,8 @@
     dest: /etc/filebeat/filebeat.yml
     # owner: "{{ ansible_user }}"
     # group: "{{ ansible_user }}"
-#- command: filebeat setup; filebeat modules enable nginx
+- name: Setup dashboard to kibana
+  command: filebeat setup -e 
 - name: Starting filebeat
   service:
    name: nginx
