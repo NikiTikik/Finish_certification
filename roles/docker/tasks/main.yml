@@ -22,11 +22,11 @@
       apt_repository:
         repo: >
           deb [arch=amd64] https://download.docker.com/{{ ansible_system | lower }}/{{ ansible_distribution | lower }}
-          {{ ansible_lsb.codename }} stable
+          {{ ansible_distribution_release }} stable
         state: present
         update-cache: true
         filename: docker
-    - name: Docker CE
+    - name: Docker
       apt:
         name:
           - docker-ce
