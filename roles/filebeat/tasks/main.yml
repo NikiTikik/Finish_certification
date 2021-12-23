@@ -24,6 +24,6 @@
   command: filebeat setup -e 
 - name: Starting filebeat
   service:
-   name: nginx
+   name: filebeat
    state: restarted
     
