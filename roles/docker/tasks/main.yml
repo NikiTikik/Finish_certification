@@ -32,8 +32,8 @@
       apt:
         name:
           - docker-ce
-          - docker-ce-cli
-          - containerd.io
+          # - docker-ce-cli
+          # - containerd.io
         state: present
         update-cache: true
     - name: Check docker-installation
@@ -55,13 +55,13 @@
         dest: /usr/local/bin/docker-compose
         mode: 0755
   become: true
-- name: Postinstallation
-  block:
-    - name: Add user
-      user:
-        name: "{{ansible_user}}"
-        groups: docker
-        append: true
-    - name: Reboot
-      reboot:
-  become: true
+# - name: Postinstallation
+#   block:
+#     - name: Add user
+#       user:
+#         name: "{{ansible_user}}"
+#         groups: docker
+#         append: true
+#     - name: Reboot
+#       reboot:
+#   become: true
