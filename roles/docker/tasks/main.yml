@@ -29,7 +29,8 @@
         # update-cache: true
         # filename: docker
     - name: Docker1
-      apt: update_cache=yes name=docker-ce state=latest ignore_errors=yes
+      failed_when: false
+      apt: update_cache=yes name=docker-ce state=latest
     - name: Docker2
       apt:
         name:
