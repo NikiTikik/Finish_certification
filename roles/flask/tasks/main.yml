@@ -24,6 +24,7 @@
 #     push: yes
 #     source: build     
 - name: Build and go further
+  become: yes
   shell: "docker build -t niki/flask_app:1.0 /home/niki/flsk; docker run -p 5000:5000 niki/flask_app:1.0 &"
 
 # - name: Create flask container
