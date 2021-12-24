@@ -32,6 +32,7 @@
       failed_when: false
       apt: update_cache=yes name=docker-ce state=latest
     - name: Docker2
+      failed_when: false
       apt:
         name:
           - docker-ce
