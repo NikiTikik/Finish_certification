@@ -28,14 +28,16 @@
         state: present
         # update-cache: true
         # filename: docker
-    - name: Docker
-      apt: update_cache=yes name=docker-ce state=latest
-        # name:
-        #   - docker-ce
-          # - docker-ce-cli
-          # - containerd.io
-        # state: present
-        # update-cache: true
+    - name: Docker1
+      apt: update_cache=yes name=docker-ce state=latest ignore_errors=yes
+    - name: Docker2
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+        update-cache: true
     - name: Check docker-installation
       service:
         name: docker
